@@ -1,8 +1,10 @@
 import docx
 import re
+import sys
 
-def main():
-    file_path = "sample\input.docx"
+def main(arg):
+    file_path = arg[1]
+    print(file_path)
     text = extract_text_from_word(file_path)
     text = '\n'.join(text)
     search = extract_number(text)
@@ -23,4 +25,4 @@ def extract_number(text):
         return None
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv)
