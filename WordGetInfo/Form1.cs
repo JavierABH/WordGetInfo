@@ -39,32 +39,56 @@ namespace WordGetInfo
         private void button_Search_Click(object sender, EventArgs e)
         {
             string filePath = txt_FilePath.Text;
+            string numero = "";
+            string precio = "";
+
             string text = ExtractTextFromWord(filePath);
-            string search = ExtractNumber(text, ref 2);
-            label_deednumber.Text = search;
+            string dataobtain = ExtractData(text, ref numero, ref precio);
+            label_deednumber.Text = numero;
+            label_price.Text = precio;
 
             label_deednumber.Visible = true;
             label_price.Visible = true;
+
+            
 
         }
 
         static string ExtractTextFromWord(string filePath)
         {
-            using (DocX document = DocX.Load(filePath))
+            try
             {
-                string text = string.Join("\n", document.Paragraphs.Select(p => p.Text));
-                return text;
+                using (DocX document = DocX.Load(filePath))
+                {
+                    string text = string.Join("\n", document.Paragraphs.Select(p => p.Text));
+                    return text;
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
             }
         }
 
-        static string ExtractNumber(string text, ref string numero ,ref string precio)
+        static string ExtractData(string text, ref string numero ,ref string precio)
         {
-            Match match = Regex.Match(text, "Escritura Pública Número (.*?)-");
-            if (match.Success)
+            Match matchNumero = Regex.Match(text, "Escritura Pública Número (.*?)-");
+            if (matchNumero.Success)
             {
-
-                return match.Groups[1].Value;
+                numero = matchNumero.Groups[1].Value;
             }
+
+            Match matchPrecio = Regex.Match(text, "Precio de la Operación.*?\\$(.*?) ");
+            if (matchPrecio.Success)
+            {
+                precio = matchPrecio.Groups[1].Value;
+            }
+
+            if (matchNumero.Success && matchPrecio.Success)
+            {
+                return "True";
+            }
+
             else
             {
                 return null;
