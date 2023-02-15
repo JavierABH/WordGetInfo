@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 using System.Configuration;
 using System.IO;
 using Xceed.Words.NET;
-// using NPOI.HWPF;
+using NPOI.HWPF;
 
 
 
@@ -47,10 +47,10 @@ namespace WordGetInfo
             string strprecio = "";
             float precio = 0;
 
-            try
-            {
+            //try
+            //{
                     
-                string text = ExtractTextFromWord(filePath);
+                string text = ReadWordDocx(filePath);
                 string dataobtain = ExtractData(text, ref strnumero, ref strprecio);
                 label_deednumber.Text = strnumero;
                 label_price.Text = strprecio;
@@ -66,31 +66,43 @@ namespace WordGetInfo
                 else
                     MessageBox.Show("No es necesario dar aviso", "SAT aviso?",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message, "Error al leer el archivo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Error: " + ex.Message, "Error al leer el archivo",
+            //        MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
         }
 
-        static string ExtractTextFromWord(string filePath)
+        static string ReadWordDocx(string filePath)
         {
-            try
-            {
+            //try
+            //{
                 using (DocX document = DocX.Load(filePath))
                 {
                     string text = string.Join("\n", document.Paragraphs.Select(p => p.Text));
                     return text;
                 }
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    return ex.Message;
+            //}
         }
 
-        static string ExtractData(string text, ref string numero ,ref string precio)
+        public static string ReadWordDoc(string filePath)
+        {
+            string text = "";
+
+            using (FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            {
+                HWPFDocument doc = new HWPFDocument(fileStream);
+                text = doc.Text.ToString();
+            }
+            return text;
+        }
+
+            static string ExtractData(string text, ref string numero ,ref string precio)
         {
             Match matchNumero = Regex.Match(text, "Escritura Pública Número (.*?)-");
             if (matchNumero.Success)
@@ -111,20 +123,6 @@ namespace WordGetInfo
                 return null;
             }
         }
-
-
-        //public static string ReadWordDoc(string filePath)
-        //{
-        //    string text = "";
-
-        //    using (FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
-        //    {
-        //        HWPFDocument doc = new HWPFDocument(stream);
-        //        text = doc.Range.Text;
-        //    }
-
-        //    return text;
-        //}
 
     }
 }
