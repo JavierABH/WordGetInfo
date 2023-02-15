@@ -40,8 +40,8 @@
             this.txt_FilePath = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -178,6 +178,13 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Valores preestablecidos";
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(169, 19);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 58;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -186,13 +193,6 @@
             this.label3.Size = new System.Drawing.Size(157, 13);
             this.label3.TabIndex = 57;
             this.label3.Text = "Alerta de precio de la operación";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(169, 19);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 58;
             // 
             // Form1
             // 

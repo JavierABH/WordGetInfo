@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Configuration;
+using System.IO;
 using Xceed.Words.NET;
+// using NPOI.HWPF;
 
 
 
@@ -47,6 +49,7 @@ namespace WordGetInfo
 
             try
             {
+                    
                 string text = ExtractTextFromWord(filePath);
                 string dataobtain = ExtractData(text, ref strnumero, ref strprecio);
                 label_deednumber.Text = strnumero;
@@ -108,5 +111,20 @@ namespace WordGetInfo
                 return null;
             }
         }
+
+
+        //public static string ReadWordDoc(string filePath)
+        //{
+        //    string text = "";
+
+        //    using (FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+        //    {
+        //        HWPFDocument doc = new HWPFDocument(stream);
+        //        text = doc.Range.Text;
+        //    }
+
+        //    return text;
+        //}
+
     }
 }

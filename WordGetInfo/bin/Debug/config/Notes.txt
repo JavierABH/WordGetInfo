@@ -1,0 +1,12 @@
+Numero de escritura publica
+Precio de la operacion
+
+
+Tipo de contrato:
+CONTRATO DE DONACIÓN PURA, GRATUITA E INCONDICIONAL DE DINERO
+CONTRATO DE DONACIÓN CON RESERVA DE USUFRUCTO VITALICIO
+
+Personas:
+Parte donante
+Parte donatoria
+
